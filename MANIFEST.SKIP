@@ -1,0 +1,12 @@
+^_build
+^Build$
+^blib
+~$
+\.bak$
+\..*\.sw.$
+^MANIFEST\.SKIP$
+.git 
+.gitignore
+^results.xml$
+^MYMETA\.yml$
+^MYMETA\.json$
