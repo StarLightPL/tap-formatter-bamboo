@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <testsuites>
-  <testsuite name="t/internal_tests/todo_inline.test" errors="1" failures="0" tests="0">
+  <testsuite name="t/internal_tests/todo_inline.test" errors="0" failures="0" tests="3">
     <system-out/>
     <testcase name="t/internal_tests/todo_inline.test" time="TEST_TIME">
       <failure><![CDATA[Fail reason(s):
-    parse errors (No plan found in TAP output)
+    unexpected TODO passed (2)
 Test output:
+1..3
+not ok 1 - Foo # TODO Just testing the todo interface.
+ok 2 - Unexpected success # TODO Just testing the todo interface.
+ok 3 - This is not todo
 
 ]]></failure>
     </testcase>

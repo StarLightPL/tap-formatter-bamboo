@@ -3,8 +3,6 @@ use 5.006;
 use strict;
 use warnings FATAL => 'all';
 use Test::More;
-use Test::Differences;
-use IO::Scalar;
 use File::Slurp qw(:all);
 use File::Temp;
 use Test::XML;
@@ -14,10 +12,9 @@ use TAP::Harness;
 use FindBin;
 my $root_dir = "$FindBin::Bin/..";
 
-$ENV{PERL5LIB} = "$root_dir/blib/lib";
+$ENV{PERL5LIB} = join(':', split(/:/, $ENV{PERL5LIB}), "$root_dir/blib/lib");
 
 my @tests = grep { -f $_ } <t/internal_tests/*.test>;
-#my @tests = qw(t/data/tests/descriptive);
 plan tests => scalar(@tests);
 
 ###############################################################################
@@ -33,8 +30,8 @@ foreach my $test (@tests) {
     my $stdout = read_file($f_out);
     my $stderr = read_file($f_err);
 
-    # print "STDOUT:\n$stdout";
-    # print "STDERR:\n$stderr";
+    #print "STDOUT:\n$stdout";
+    #print "STDERR:\n$stderr";
 
     my $result = read_file('results.xml');
     (my $expect = $test) =~ s{\.test$}{\.expect};
