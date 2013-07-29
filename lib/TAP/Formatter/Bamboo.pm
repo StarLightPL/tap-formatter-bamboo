@@ -97,7 +97,7 @@ sub _save_results {
 
 =head1 NAME
 
-TAP::Formatter::Bamboo - Harness output delegate for JUnit output
+TAP::Formatter::Bamboo - Harness output delegate for Atlassian's Bamboo CI server
 
 =head1 SYNOPSIS
 
@@ -116,41 +116,23 @@ Or, in your own scripts:
 
 =head1 DESCRIPTION
 
-B<This code is currently in alpha state and is subject to change.>
+C<TAP::Formatter::Bamboo> provides JUnit output formatting for C<TAP::Harness>,
+which can be used in Atlassian's Bamboo CI server.
 
-C<TAP::Formatter::Bamboo> provides JUnit output formatting for C<TAP::Harness>.
-
-By default (e.g. when run with F<prove>), the I<entire> test suite is gathered
-together into a single JUnit XML document, which is then displayed on C<STDOUT>.
-You can, however, have individual JUnit XML files dumped for each individual
-test, by setting c<PERL_TEST_HARNESS_DUMP_TAP> to a directory that you would
-like the JUnit XML dumped to.  Note, that this will B<also> cause
-C<TAP::Harness> to dump the original TAP output into that directory as well (but
-IMHO that's ok as you've now got the data in two parsable formats).
-
-Timing information is included in the JUnit XML, I<if> you specified C<--timer>
-when you ran F<prove>.
-
-In standard use, "passing TODOs" are treated as failure conditions (and are
-reported as such in the generated JUnit).  If you wish to treat these as a
-"pass" and not a "fail" condition, setting C<ALLOW_PASSING_TODOS> in your
-environment will turn these into pass conditions.
-
-The JUnit output generated is partial to being grokked by Hudson
-(L<http://hudson.dev.java.net/>).  That's the build tool I'm using at the
-moment and needed to be able to generate JUnit output for.
-
-=head1 ATTRIBUTES
+This module is based on TAP::Formatter::JUnit by Graham TerMarsch
+<cpan@howlingfrog.com>, main differences are:
 
 =over
 
-=item testsuites
+=item * resulting XML is saved in results.xml instead of putting it to the stdout
 
-List-ref of test suites that have been executed.
+=item * information about passing/failing tests is put to the STDOUT/STDERR respectively,
+so it can be watched in Bamboo's build logs (also live during build)
 
-=item xml
+=item * output of failed tests is saved in 'failure' tag, as Bamboo doesn't care about
+'system-out' and 'system-err' tags (but shows content of 'failure')
 
-An C<XML::Generator> instance, to be used to generate XML output.
+=item * short information about failure reason is put in the first line of 'failure' tag
 
 =back
 
@@ -167,18 +149,17 @@ formatter session.
 
 =item B<summary($aggregate)>
 
-Prints the summary report (in JUnit) after all tests are run.
-
-=item B<add_testsuite($suite)>
-
-Adds the given XML test C<$suite> to the list of test suites that we've
-executed and need to summarize.
+Save resulting XML in results.xml file.
 
 =back
 
 =head1 AUTHOR
 
-Graham TerMarsch <cpan@howlingfrog.com>
+Piotr Piątkowski <pp@idea7.pl>
+
+Graham TerMarsch <cpan@howlingfrog.com> (original C<TAP::Formatter::JUnit>)
+
+Credits from the original module:
 
 Many thanks to Andy Armstrong et al. for the B<fabulous> set of tests in
 C<Test::Harness>; they became the basis for the unit tests here.
@@ -195,17 +176,13 @@ Other thanks go out to those that have provided feedback, comments, or patches:
 
 =head1 COPYRIGHT
 
-Copyright 2008-2010, Graham TerMarsch.  All Rights Reserved.
-
 This is free software; you can redistribute it and/or modify it under the same
 terms as Perl itself.
 
 =head1 SEE ALSO
 
+L<TAP::Formatter::JUnit>,
 L<TAP::Formatter::Console>,
-L<TAP::Formatter::Bamboo::Session>,
-L<http://hudson.dev.java.net/>,
-L<http://jra1mw.cvs.cern.ch:8180/cgi-bin/jra1mw.cgi/org.glite.testing.unit/config/JUnitXSchema.xsd?view=markup&content-type=text%2Fvnd.viewcvs-markup&revision=HEAD>,
 L<http://confluence.atlassian.com/display/BAMBOO/JUnit+parsing+in+Bamboo>.
 
 =cut

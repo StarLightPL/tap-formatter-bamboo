@@ -20,9 +20,6 @@ sub _initialize {
     my ($self, $arg_for) = @_;
     $arg_for ||= {};
 
-    #my $passing_todo_ok = delete $arg_for->{passing_todo_ok};
-    #$self->passing_todo_ok($passing_todo_ok);
-
     return $self->SUPER::_initialize($arg_for);
 }
 
