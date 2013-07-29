@@ -9,7 +9,6 @@ extends qw(
 use Storable qw(dclone);
 use File::Path qw(mkpath);
 use IO::File;
-use TAP::Formatter::Bamboo::Result;
 
 has '_output' => (
     is => 'rw',
@@ -45,17 +44,17 @@ sub close_test {
         parse_errors => scalar($parser->parse_errors),
         output => $self->_output,
     };
-            
+
     my @fail_reasons = _fail_reasons($parser);
     if(@fail_reasons) {
         $results->{fail_reasons} = \@fail_reasons;
-        print STDERR "FAIL " . $self->name . "\n" . 
+        print STDERR "FAIL " . $self->name . "\n" .
             join("", map { "    $_\n" } @fail_reasons);
     }
     else {
         print { $self->formatter->stdout } "PASS " . $self->name . "\n";
     }
-    
+
     push(@{$self->formatter->_test_results}, $results);
 }
 
@@ -75,7 +74,7 @@ sub _fail_reasons {
     if( !@reasons && $parser->exit != 0) {
         push(@reasons, "non-zero exit code (" . $parser->exit . ")");
     }
-    
+
     if( !@reasons && $parser->has_problems ) {
         push(@reasons, "unknown reason (probably some bug encountered)");
     }

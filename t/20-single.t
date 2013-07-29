@@ -33,9 +33,6 @@ foreach my $test (@tests) {
     my $stdout = read_file($f_out);
     my $stderr = read_file($f_err);
 
-    unlink($f_out) if -e $f_out;
-    unlink($f_err) if -e $f_err;
-
     # print "STDOUT:\n$stdout";
     # print "STDERR:\n$stderr";
 
@@ -51,6 +48,4 @@ foreach my $test (@tests) {
         write_file("$res", $result);
         diag("Actual results saved to file $res");
     }
-
-    #eq_or_diff($result, $expected, $test);
 }
