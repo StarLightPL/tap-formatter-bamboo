@@ -10,3 +10,5 @@
 ^results.xml$
 ^MYMETA\.yml$
 ^MYMETA\.json$
+Makefile.old
+.*\.tar\.gz

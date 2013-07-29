@@ -94,6 +94,8 @@ sub _save_results {
 }
 1;
 
+=encoding utf8
+
 =head1 NAME
 
 TAP::Formatter::Bamboo - Harness output delegate for Atlassian's Bamboo CI server
@@ -154,7 +156,7 @@ Save resulting XML in results.xml file.
 
 =head1 AUTHOR
 
-Piotr Piątkowski <pp@idea7.pl>
+Piotr Piatkowski <pp@idea7.pl>
 
 Graham TerMarsch <cpan@howlingfrog.com> (original C<TAP::Formatter::JUnit>)
 

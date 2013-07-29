@@ -8,7 +8,12 @@ WriteMakefile
   'EXE_FILES' => [],
   'VERSION_FROM' => 'lib/TAP/Formatter/Bamboo.pm',
   'PREREQ_PM' => {
-                   'Test::More' => 0
+                   'Test::More' => 0,
+                   'XML::LibXML' => '2',
+                   'MooseX::NonMoose' => '0.2',
+                   'TAP::Harness' => '3.2',
+                   'Moose' => '2',
+                   'Encode' => '2.42'
                  }
 )
 ;
