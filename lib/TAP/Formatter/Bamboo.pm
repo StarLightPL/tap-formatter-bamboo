@@ -4,7 +4,6 @@ use Moose;
 use MooseX::NonMoose;
 use XML::LibXML;
 use Encode qw(:all);
-use Data::Dumper;
 
 use TAP::Formatter::Bamboo::Session;
 

@@ -6,10 +6,6 @@ extends qw(
     TAP::Formatter::Console::Session
 );
 
-use Storable qw(dclone);
-use File::Path qw(mkpath);
-use IO::File;
-
 has '_output' => (
     is => 'rw',
     isa => 'Str',

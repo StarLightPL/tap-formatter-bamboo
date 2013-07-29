@@ -16,8 +16,11 @@ my $builder = Module::Build->new(
         'Test::More' => 0,
     },
     requires => {
-        #'ABC'              => 1.6,
-        #'Foo::Bar::Module' => 5.0401,
+        'Moose'            => 2.0000,
+        'MooseX::NonMoose' => 0.20,
+        'TAP::Harness'     => 3.20,
+        'Encode'           => 2.42,
+        'XML::LibXML'      => 2.0000,
     },
     add_to_cleanup     => [ 'TAP-Formatter-Bamboo-*' ],
     create_makefile_pl => 'traditional',
