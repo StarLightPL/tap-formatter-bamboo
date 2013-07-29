@@ -12,7 +12,7 @@ extends qw(
     TAP::Formatter::Console
 );
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 has _test_results => (
     is      => 'rw',
